@@ -1,0 +1,140 @@
+{% extends 'header_footer.html' %}
+{% load i18n %}
+
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+    <div id="middle" class="container">
+
+      <div class="container mt-3 mb-3">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10">
+            <span class="badge badge-light">
+              <a href="#" class="text-secondary">
+                <b><i class="fas fa-angle-double-left"></i>{% trans "Go back" %}</b>
+              </a>
+            </span>
+          </div>
+          <div class="col- col-md-1"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-1 col-md-3"></div>
+          <div class="col-10 col-md-6 border border-light rounded shadow p-3 mb-5 bg-white">
+            <h3 class="text-center">Initial Article</h3>
+            <form id="save_initial_article" action="" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                {{ create_initial_article_fileds.category }}
+                <div class="full-w height-s"></div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="stable_part">{% now 'Y' %}-</span>
+                    </div>
+                    {{ create_initial_article_fileds.keywords }}
+                </div>
+              <div class="full-w height-s"></div>
+              </div>
+              <button type="submit" class="btn btn-primary" onclick="addDateToKeywords()">{% trans "Save" %}</button>
+              <div class="full-w height-m"></div>
+            </form>
+          </div>
+          <div class="col-1 col-md-3"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+  <script>
+    function submit_(form){
+        $(form).submit();
+    }
+
+    function addDateToKeywords(){
+        var keywords_text = $('#id_keywords').val();
+        var stable_part = $('#stable_part').text();
+        $('#id_keywords').val(stable_part + keywords_text);
+        alert(stable_part);
+        submit_('#save_initial_article');
+    }
+  </script>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ create_initial_article_fileds.category }}
+
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" id="id_keywords_notchangable">{{ current_year }}-</div>
+                </div>
+                {{ create_initial_article_fileds.keywords }}
+            </div>
+
+
+
+            <button onclick="addDateToKeywords()" type="submit">{% trans 'Save' %}</button>
+        </form>
+
+
+  <div style="display:none;" id="additional_information">
+      <p id="year">{{ current_year }}-</p>
+
+
+  </div>
+
+
+
+  <script>
+      function addDateToKeywords(){
+        var keywords_text = $('#id_keywords').val();
+        var year = $('#year').text();
+        $('#id_keywords').val(year + keywords_text)
+      }
+  </script>

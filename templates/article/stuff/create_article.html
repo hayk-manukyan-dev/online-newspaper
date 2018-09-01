@@ -1,0 +1,77 @@
+{% extends 'header_footer.html' %}
+{% load i18n %}
+{% load initialarticle_filter %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+        {{ create_article_form.media }}
+    {% endblock %}
+
+{% block middle %}
+
+    <div id="middle" class="container">
+
+      <div class="container mt-3 mb-3">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10">
+            <span class="badge badge-light">
+              <a href="#" class="text-secondary">
+                <b><i class="fas fa-angle-double-left"></i> Go back</b>
+              </a>
+            </span>
+          </div>
+          <div class="col- col-md-1"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10 border border-light rounded shadow p-3 mb-5 bg-white">
+            <h3 class="text-center">{% trans "Create Article" %}</h3>
+              <p>{% trans "Article is in" %} <b class="text-body">{{ article_language_code }}</b></p>
+            <p class="hover-bg-light">
+                {% if initialarticle|possible_languges %}
+                    {% trans "Possible" %}
+                    {% for possible_language in initialarticle|possible_languges %}
+                        {% if possible_language.code != article_language_code %}
+                            <a href="{% url 'article_create' language=possible_language.code keywords=initialarticle.keywords %}">{{ possible_language.label }}</a>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </p>
+            <p class="hover-bg-light">
+                {% if initialarticle|article_exist_languages %}
+                    {% trans "Article exist in" %} {% for existed_language in initialarticle|article_exist_languages %}
+                        <a href="/article/get/{{ existed_language.code }}/{{ initialarticle.keywords }}">
+                            {{ existed_language.label }}
+                        </a>
+                    {% endfor %}
+                {% endif %}
+            </p>
+
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ article_create_form.title }}
+                <div class="full-w height-s"></div>
+                {{ article_create_form.description }}
+                <div class="full-w height-s"></div>
+                {{ article_create_form.text }}
+                <div class="full-w height-s"></div>
+                {{ article_create_form.main_image }}
+                <div class="full-w height-s"></div>
+                <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+                <div class="full-w height-m"></div>
+            </form>
+
+          </div>
+          <div class="col- col-md-1"></div>
+        </div>
+      </div>
+
+    </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,57 @@
+{% extends 'header_footer.html' %}
+{% load i18n %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+
+    <div id="middle" class="container">
+
+        <div class="container mt-3 mb-3">
+            <div class="row">
+            <div class="col- col-md-1"></div>
+            <div class="col-12 col-md-10">
+                <span class="badge badge-light">
+                <a href="#" class="text-secondary">
+                    <b><i class="fas fa-angle-double-left"></i> Go back</b>
+                </a>
+                </span>
+            </div>
+            <div class="col- col-md-1"></div>
+            </div>
+        </div>
+
+
+        <div class="container">
+        <div class="row">
+          <div class="col-1 col-md-4"></div>
+          <div class="col-10 col-md-4 border border-light rounded shadow p-3 mb-5 bg-white">
+            <h3 class="text-center">{% trans "Avatar" %}</h3>
+            <div class="media">
+              <img class="mr-3 rounded profile-img" src="/media/{{ request.user.avatar }}" alt="img" />
+            </div>
+            <a href="/user/avatarremove" class="text-danger h5">
+              <i class="fas fa-trash"></i>
+            </a>
+            <form enctype="multipart/form-data" action="" method="post">
+              {% csrf_token %}
+              <div class="full-w height-l"></div>
+              <div class="form-group">
+                {{ avatar_form.avatar }}
+              </div>
+              <div class="full-w height-s"></div>
+              <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+              <div class="full-w height-m"></div>
+            </form>
+          </div>
+          <div class="col-1 col-md-4"></div>
+        </div>
+      </div>
+
+
+    </div>
+
+{% endblock %}

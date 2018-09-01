@@ -1,0 +1,32 @@
+.full-w{
+  width: 100%;
+  height: auto;
+}
+
+.height-sm{
+  height: 5px;
+}
+
+.height-s{
+  height: 10px;
+}
+
+.height-m{
+  height: 20px;
+}
+
+.height-l{
+  height: 30px;
+}
+
+.inline-block{
+  display: inline-block !important;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}

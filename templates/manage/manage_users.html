@@ -1,0 +1,91 @@
+{% extends 'header_footer.html' %}
+{% load i18n %}
+{% load group_tags %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+    <div id="middle" class="container">
+
+      <div class="container mt-3 mb-3">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10">
+            <span class="badge badge-light">
+              <a href="#" class="text-secondary">
+                <b><i class="fas fa-angle-double-left"></i> Go back</b>
+              </a>
+            </span>
+          </div>
+          <div class="col- col-md-1"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10 border border-light rounded shadow p-3 mb-5 bg-white">
+            <h3 class="text-center">Users</h3>
+
+
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr class="text-center">
+                  <th scope="col">{% trans "F/L Name, Email" %}</th>
+                  <th scope="col">{% trans "Moderator" %}</th>
+                  <th scope="col">{% trans "Stuff" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for user in users %}
+                <tr>
+                  <td>
+                    <p>{{ user.first_name }}{{ user.last_name }}</p> <p class="text-muted"><small>{{ user.email }}</small></p>
+                  </td>
+                    {% if user|has_group:"moderator"  %}
+                        <td class="text-center">
+                            <a type="button" class="btn btn-outline-dark" href="/admin/remove/userfromgroup/{{ user.pk }}/moderator">
+                                <i class="fas fa-times"></i>
+                            </a>
+                            <p class="text-muted"><small>{% trans "Is not Moderator" %}</small></p>
+                        </td>
+                    {% else %}
+                        <td class="text-center">
+                            <a type="button" class="btn btn-outline-primary" href="/admin/add/useringroup/{{ user.pk }}/moderator">
+                                <i class="fas fa-check"></i>
+                            </a>
+                            <p class="text-muted"><small>{% trans "Is Moderator" %}</small></p>
+                        </td>
+                    {% endif %}
+
+                    {% if user|has_group:"stuff"  %}
+                        <td class="text-center">
+                            <a type="button" class="btn btn-outline-dark" href="/admin/remove/userfromgroup/{{ user.pk }}/stuff">
+                                <i class="fas fa-times"></i>
+                            </a>
+                            <p class="text-muted"><small>{% trans "Is not Stuff" %}</small></p>
+                        </td>
+                    {% else %}
+                        <td class="text-center">
+                            <a type="button" class="btn btn-outline-primary" href="/admin/add/useringroup/{{ user.pk }}/stuff">
+                                <i class="fas fa-check"></i>
+                            </a>
+                            <p class="text-muted"><small>{% trans "Is Stuff" %}</small></p>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="col- col-md-1"></div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+
+	  	<title>test</title>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="{% static 'librarys/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'librarys/popper.min.js' %}"></script>
+
+        <link rel="stylesheet" href="{% static 'librarys/bootstrap-4.1.1/dist/css/bootstrap.css' %}">
+        <script src="{% static 'librarys/bootstrap-4.1.1/dist/js/bootstrap.js' %}"></script>
+        <script src="{% static 'fontawesome-free-5.1.0-web/js/all.js' %}"></script>
+
+
+  </head>
+
+  <body>
+
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+
+    {{ request }}
+
+    <div style="display:none" id="hided">hello</div>
+
+
+  <form id="unreached_form" action="/test" method="post" onsubmit="submitTest(this); return false" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input id="text" name="name" type="text">
+
+      <button class="btn" id="unreached_btn" type="submit" disabled>save</button>
+  </form>
+
+
+
+<div class="alert alert-primary" role="alert">
+  A simple primary alert—check it out!<i class="fas fa-address-card"></i>
+</div>
+
+    <script>
+        function submitTest(f){
+            if (confirm('yes or no')){
+                f.submit()
+            }
+        }
+
+        $('#text').focusout(function(){
+                if ($('#text').val().length == 0){
+                    $('#unreached_btn').prop('disabled', true)
+                }
+                else{$('#unreached_btn').prop('disabled', false)}
+            }
+        )
+    </script>
+
+
+  </body>
+</html>

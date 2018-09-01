@@ -1,0 +1,10 @@
+locale.js require to base.addition_information.js
+HTMLTagsBootstrapAdapted.js requierd locale.js
+
+in HTML file idd in alternately
+
+1 base.addition_information
+2 locale.js
+3 base.HTMLTagsBootstrapAdapted.js
+
+4 optional - if useing ajax post or get then need base.csrf_token.js
