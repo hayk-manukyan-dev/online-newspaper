@@ -7,7 +7,7 @@ from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 from datetime import datetime
-'''
+
 class ArticleManager(models.Manager):
 
     def language_exist(self, keywords, language):
@@ -75,4 +75,3 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
-'''
