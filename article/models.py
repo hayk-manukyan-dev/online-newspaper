@@ -57,7 +57,7 @@ class Article(models.Model):
     language = models.CharField(max_length = 3, null = True, blank = True)
     title = models.CharField(max_length = 200)
     description = models.CharField(max_length = 500)
-    text = models.CharField(max_length = 500)
+    text = models.CharField(max_length = 21845)
     main_image = models.ImageField(upload_to='article', default='article.jpg')
     date_time = models.DateTimeField(auto_now = True)
 
