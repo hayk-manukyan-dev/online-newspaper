@@ -32,6 +32,35 @@
 
   <body>
 
+      <div class="menu" id="menu">
+        <div class="container">
+            <div class="menu-but-container container-fluid">
+                <span class="symbol" onclick="closeMenu()"><h3><i class="fas fa-times"></i></h3></span>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="text-center">
+                <div class="media">
+                    <img class="profile-img horizontal-align-center" src="/media/{{ request.user.avatar }}">
+                </div>
+            </div>
+            <h2 class="text-muted cursor-default">{{ request.user.first_name }} {{ request.user.last_name }}</h2>
+            {% if request.user.is_authenticated %}
+                {% if request.user|has_group:"stuff" %}
+                    <a class="dropdown-item" href="/initialarticle/create">{% trans "Create Article" %}</a>
+                    <a class="dropdown-item" href="/initialarticle/userarticles">{% trans "My Articles"%}</a>
+                {% endif %}
+                {% if request.user|has_group:"admin" %}
+                    <a class="dropdown-item" href="/admin/getusers">{% trans "Manage Users" %}</a>
+                    <a class="dropdown-item" href="/articlecategory/getall">{% trans "Manage Categories" %}</a>
+                {% endif %}
+                    <a class="dropdown-item" href="/user/edit">{% trans "Edit Profile" %}</a>
+                    <a class="dropdown-item" href="/user/logout">{% trans "Log Out" %}</a>
+            {% endif %}
+        </div>
+      </div>
+
+
   <div class="full-w height-m"></div>
     <div id="header" class="container">
       {% if messages %}
@@ -72,30 +101,15 @@
 
 
         {% if request.user.is_authenticated %}
-          <div id="account-angle">
-            <a class="text-center center logo profile-but" id="dropdownAccountMenu" data-toggle="dropdown">
-            <div class="container">
-              <div class="media inline-block">
-                <img class="rounded profile-img" src="/media/{{ request.user.avatar }}" alt="img" />
-              </div>
-            </div>
-            </a>
 
-            <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="dropdownAccountMenu">
-              <h6 class="dropdown-header">{{ request.user.first_name }} {{ request.user.last_name }}</h6>
-                {% if request.user|has_group:"stuff" %}
-                    <a class="dropdown-item" href="/initialarticle/create">{% trans "Create Article" %}</a>
-                    <a class="dropdown-item" href="/initialarticle/userarticles">{% trans "My Articles"%}</a>
-                {% endif %}
-                {% if request.user|has_group:"admin" %}
-                    <a class="dropdown-item" href="/admin/getusers">{% trans "Manage Users" %}</a>
-                    <a class="dropdown-item" href="/articlecategory/getall">{% trans "Manage Categories" %}</a>
-                {% endif %}
-                <a class="dropdown-item" href="/user/edit">{% trans "Edit Profile" %}</a>
-                <a class="dropdown-item" href="/user/logout">{% trans "Log Out" %}</a>
-            </div>
-
+          <div id="account-angle" class="center inline-block">
+            <h4>
+              <span class="btn badge badge-secondary" onclick="openMenu()">
+                <i class="fas fa-bars"></i>
+              </span>
+            </h4>
           </div>
+        </div>
 
 
         {% else %}
@@ -152,6 +166,13 @@
       <div class="full-w height-s"></div>
     </div>
 
-
+      <script>
+      function openMenu(){
+        $('#menu').css('width', '75%');
+      }
+      function closeMenu(){
+        $('#menu').css('width', '0%');
+      };
+      </script>
   </body>
 </html>

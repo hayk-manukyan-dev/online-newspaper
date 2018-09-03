@@ -55,3 +55,20 @@
 .link-none-underline:hover{
   text-decoration: none;
 }
+
+.menu{
+  height: 100%;
+  width: 0%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #fbfbfb;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 10px;
+}
+
+.cursor-default{
+  cursor: default;
+}
