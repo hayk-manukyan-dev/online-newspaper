@@ -17,10 +17,7 @@ from initialarticle.views import CreateInitialArticle, EditInitialArticle, Reque
 from article.staff_views import  CreateArticle, EditArticle, removeArticle
 from article.views import GetArticleByKeywords, GetArticlesByCategory, GetMixedArticles
 
-
-#from processing.base.message_manager import Test
-#from processing.base.article_manager import Test
-#from user.views import Test
+from processing.views.main_view import EnteryLanguageDetect
 
 
 
@@ -30,7 +27,8 @@ urlpatterns = [
     path('translate/<str:language>', changeLanguage),
 
     path(r'summernote/', include('django_summernote.urls')),
-#    path('test', Test.as_view()),
+
+    path('', EnteryLanguageDetect.as_view()),
 
     path('user/signup', SignUp.as_view()),
     path('user/login', LogIn.as_view()),
