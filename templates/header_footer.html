@@ -47,13 +47,18 @@
             <h2 class="text-muted cursor-default">{{ request.user.first_name }} {{ request.user.last_name }}</h2>
             {% if request.user.is_authenticated %}
                 {% if request.user|has_group:"stuff" %}
+                    <div class="full-w height-m"></div>
+                    <p class="text-muted cursor-default h6"><small>{% trans "Stuff" %}</small></p>
                     <a class="dropdown-item" href="/initialarticle/create">{% trans "Create Article" %}</a>
                     <a class="dropdown-item" href="/initialarticle/userarticles">{% trans "My Articles"%}</a>
                 {% endif %}
                 {% if request.user|has_group:"admin" %}
+                    <div class="full-w height-m"></div>
+                    <p class="text-muted cursor-default h6"><small>{% trans "Admin" %}</small></p>
                     <a class="dropdown-item" href="/admin/getusers">{% trans "Manage Users" %}</a>
                     <a class="dropdown-item" href="/articlecategory/getall">{% trans "Manage Categories" %}</a>
                 {% endif %}
+                    <div class="full-w height-m"></div>
                     <a class="dropdown-item" href="/user/edit">{% trans "Edit Profile" %}</a>
                     <a class="dropdown-item" href="/user/logout">{% trans "Log Out" %}</a>
             {% endif %}
