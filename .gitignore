@@ -17,7 +17,6 @@ locale/
 settings.py
 wsgi.py
 media/**
-static/librarys/
 
 # Environments
 venv/
