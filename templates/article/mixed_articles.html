@@ -27,15 +27,17 @@
 
       <div class="row">
 
-        <div class="col-12 col-sm-8">
-          <div class="card mb-4">
-            <img class="card-img-top" src="some00615.jpg" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <div class="col-12 col-sm-8" style="display:none">
+          <a href="/article/get/{{ language_code }}/{{ article.initial.keywords }}" class="link-none-underline">
+            <div class="card mb-4">
+                <img class="card-img-top" src="some00615.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ bg_article.title }}</h5>
+                    <p class="card-text">{{ bg_article.description }}</p>
+                    <p class="card-text"><small class="text-muted">{{ bg_article.date_time }}</small></p>
+                </div>
             </div>
-          </div>
+          </a>
         </div>
 
 

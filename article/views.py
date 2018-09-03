@@ -54,10 +54,3 @@ class GetMixedArticles(TemplateView):
         context['mixed_articles'] = self.collect_articles
         return context
 
-
-
-#-----ajax-----
-
-def getArticle(request, *args, **kwargs):
-    if request.method == 'POST':
-        pass
