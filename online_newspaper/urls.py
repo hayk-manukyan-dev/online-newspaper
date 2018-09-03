@@ -63,6 +63,9 @@ urlpatterns = [
 
     path('article/category/<str:language>/<int:category_pk>/<int:page>', GetArticlesByCategory.as_view()),
     path('<str:language>', GetMixedArticles.as_view()),
+
+    path('static/documentation', TemplateView.as_view(template_name = 'documentation.html')),
+    path('static/source_code', TemplateView.as_view(template_name = 'source_code.html')),
 ]
 
 
