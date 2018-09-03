@@ -1,0 +1,109 @@
+{% extends 'header_footer.html' %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+    <div id="middle" class="container">
+        <div class="container">
+            <p class="h3 text-primary">Settings</p>
+            <p>&nbsp In project files not exist settings.py. Add it and set minimal requirments</p>
+            <p class="text-secondary">&nbsp &nbsp Set one or more <a href="#language">language</a></p>
+            <p class="text-secondary">&nbsp &nbsp Set GOOGLE_RECAPTCHA_SECRET_KEY <a href="https://github.com/praekelt/django-recaptcha">django-recaptcha
+            </a></p>
+            <p class="text-secondary">&nbsp &nbsp Add <a href="#mix_by_category">mix_by_category</a> named dictionary variable</p>
+            <p class="h3 text-primary">Setup</p>
+            <p>&nbsp 1. Migrate in order.</p>
+            <p class="text-secondary">&nbsp &nbsp 1. user</p>
+            <p class="text-secondary">&nbsp &nbsp 2. blacklist</p>
+            <p class="text-secondary">&nbsp &nbsp 3. articlecategory</p>
+            <p class="text-secondary">&nbsp &nbsp 4. initialarticle</p>
+            <p class="text-secondary">&nbsp &nbsp 5. article</p>
+            <p class="text-secondary">&nbsp &nbsp imagekit, simple_email_confirmation, django_summernote</p>
+            <p class="text-secondary">&nbsp &nbsp migrate wihout app name</p>
+            <p class="">&nbsp Afther complete migration enter to admin panel in online-newspaper/admin and create groups stuff, moderator and admin</p>
+            <p id="language" class="h3 text-primary">Languages</p>
+            <p class="">&nbsp Article multilanguage system work with settings LANGUAGES. Possible create only in existed language of settings.LANGUAGES</p>
+            <p class="h3 text-primary">Template Direct</p>
+            <p class="">&nbsp For custom templates need to create templates schema same of existed in one direct higher and edit TEMPLATES DIRS in settings</p>
+            <p class="h3 text-primary">Files and dirs</p>
+            <p>&nbsp Default avatar - in media/images/avatars/ add avatar.jpg file</p>
+            <p>&nbsp Logo - in media/web/ add logo.png file</p>
+            <p id="mix_by_category" class="h3 text-primary">mix_by_category</p>
+            <p>&nbsp It will mix articles by category</p>
+            <p>&nbsp Usage - set as key name of category and as value number of articles</p>
+      </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ create_initial_article_fileds.category }}
+
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" id="id_keywords_notchangable">{{ current_year }}-</div>
+                </div>
+                {{ create_initial_article_fileds.keywords }}
+            </div>
+
+
+
+            <button onclick="addDateToKeywords()" type="submit">{% trans 'Save' %}</button>
+        </form>
+
+
+  <div style="display:none;" id="additional_information">
+      <p id="year">{{ current_year }}-</p>
+
+
+  </div>
+
+
+
+  <script>
+      function addDateToKeywords(){
+        var keywords_text = $('#id_keywords').val();
+        var year = $('#year').text();
+        $('#id_keywords').val(year + keywords_text)
+      }
+  </script>
