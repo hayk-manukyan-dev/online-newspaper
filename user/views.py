@@ -72,7 +72,7 @@ class LogIn(TemplateView):
 
 
 class LogOut(View):
-    @login_required
+    @method_decorator(login_required)
     def get(self, request, *args, **kwargs):
         logout(request)
         MessageManager().makeMessage(request, message = 'logout_successful')
