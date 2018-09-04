@@ -17,7 +17,7 @@ def get_possible_languages(self):
     existed_languages = copy.deepcopy(languages_dict)
     for article in articles:
         if Article.objects.language_exist(self.keywords, article.language):
-            existed_languages.remove(article.language)
+            del existed_languages[article.language]
     collect_languages = []
     for LANGUAGE in LANGUAGES:
         if LANGUAGE[0] in existed_languages != True:
