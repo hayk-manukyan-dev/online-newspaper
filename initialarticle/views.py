@@ -30,9 +30,9 @@ class CreateInitialArticle(TemplateView):
         self.form = InitialArticleCreateForm(request.POST, request = request)
         if self.form.is_valid():
             initial_aticle = self.form.save(request.user)
-            return redirect('/article/stuff/article/create/'+ request.LANGUAGE_CODE +'/' + str(initial_aticle.keywords))
+            return redirect('/article/stuff/create/'+ request.LANGUAGE_CODE +'/' + str(initial_aticle.keywords))
         MessageManager().makeMessage(request, message = 'form_is_not_valid')
-        return redirect('x')#request.META.get('HTTP_REFERER'))
+        return redirect(request.META.get('HTTP_REFERER'))
 
     def get_context_data(self, **kwargs):
         context = super(CreateInitialArticle, self).get_context_data(**kwargs)
