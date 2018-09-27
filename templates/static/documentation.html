@@ -8,7 +8,7 @@
 
     <div id="middle" class="container">
         <div class="container">
-            <p class="h5 text-primary"><a href="https://github.com/haykhman/online-newspaper/blob/master/LICENSE" target="_blank">MIT License</a></p>
+            <h5 class="text-primary"><a href="https://github.com/haykhman/online-newspaper/blob/master/LICENSE" target="_blank">MIT License</a></h5>
             <div class="full-w height-s"></div>
             <p class="h3 text-primary">Project Use</p>
             <p class="">&nbsp django-imagekit v4.0.2 <a href="https://github.com/matthewwithanm/django-imagekit" target="_blank">GitHub</a></p>
@@ -20,13 +20,13 @@
             <p>&nbsp Bootstrap v4.1.1 <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
             <p>&nbsp Fontawesome free v5.1.0 <a href="https://fontawesome.com/" target="_blank">Fontawesome</a></p>
             <p>&nbsp popper.js <a href="https://popper.js.org/" target="_blank">popper.js.org</a></p>
-            <p class="h3 text-primary">Settings</p>
+            <h3 class="text-primary">Settings</h3>
             <p>&nbsp In project files not exist settings.py. Add it and set minimal requirments</p>
             <p class="text-secondary">&nbsp &nbsp Set one or more <a href="#language">language</a></p>
             <p class="text-secondary">&nbsp &nbsp Set GOOGLE_RECAPTCHA_SECRET_KEY <a href="https://github.com/praekelt/django-recaptcha">django-recaptcha
             </a></p>
             <p class="text-secondary">&nbsp &nbsp Add <a href="#mix_by_category">mix_by_category</a> named dictionary variable</p>
-            <p class="h3 text-primary">Setup</p>
+            <h3 class="text-primary">Setup</h3>
             <p>&nbsp 1. Add this applications in INSTALLED_APPS and migrate in order.</p>
             <p class="text-secondary">&nbsp &nbsp 1. user</p>
             <p class="text-secondary">&nbsp &nbsp 2. blacklist</p>
@@ -35,18 +35,19 @@
             <p class="text-secondary">&nbsp &nbsp 5. article</p>
             <p class="text-secondary">&nbsp &nbsp imagekit, simple_email_confirmation, django_summernote</p>
             <p class="text-secondary">&nbsp &nbsp migrate wihout app name</p>
-            <p class="">&nbsp Afther complete migration enter to admin panel in online-newspaper/admin and create groups stuff, moderator and admin</p>
+            <p class=""> &nbsp Afther complete migration enter to admin panel in online-newspaper/admin and create groups stuff, moderator and admin</p>
+            <p> &nbsp Add JQuery, Bootstrap, Fontawesome and popper.js in static folder for using defoult templaes</p>
             <p id="language" class="h3 text-primary">Languages</p>
             <p class="">&nbsp Article multilanguage system work with settings LANGUAGES. Possible create  only in existed language of settings.LANGUAGES</p>
-            <p class="h3 text-primary">Template Direct</p>
+            <h3 class="text-primary">Template Direct</h3>
             <p class="">&nbsp For custom templates need to create templates schema same of existed in one direct higher and edit TEMPLATES DIRS in settings</p>
-            <p class="h3 text-primary">Files and dirs</p>
+            <h3 class="text-primary">Files and dirs</h3>
             <p>&nbsp Default avatar - in media/images/avatars/ add avatar.jpg file</p>
             <p>&nbsp Logo - in media/web/ add logo.png file</p>
-            <p id="mix_by_category" class="h3 text-primary">mix_by_category</p>
+            <h3 id="mix_by_category" class="h3 text-primary">mix_by_category</h3>
             <p>&nbsp It will mix articles by category</p>
             <p>&nbsp Usage - set as key name of category and as value number of articles</p>
-      </div>
+        </div>
     </div>
 
 {% endblock %}

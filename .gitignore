@@ -1,6 +1,7 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 migrations/
+requirements.txt
 
 .git/
 
@@ -16,6 +17,7 @@ locale/
 # Django stuff:
 settings.py
 media/**
+static/**
 
 # Environments
 venv/
