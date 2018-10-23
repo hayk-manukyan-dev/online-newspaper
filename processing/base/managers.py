@@ -37,6 +37,8 @@ class MessageManager(object):
                 _('Somthing went wrong, login was not applied. Look here for additional information'),
                 messages.warning],
             "problem_with_save" : [_("Somthing went wrong, please try again"), messages.warning],
+            "unsupported_file_type": ["Unsupported file type", False, messages.error],
+
             "form_is_not_valid" : [_("Entered som characters or field is not valid please check fields and try again to save"), messages.warning],
             "logout_successful" : [_("Success log outed"), messages.info],
             "no_privileg_to_reach_this_page" : [_("You has no privileg to reach this page"), messages.error],

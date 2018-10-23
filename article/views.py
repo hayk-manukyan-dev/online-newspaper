@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from article.models import Article
 from articlecategory.models import ArticleCategory
 
-from online_newspaper.settings import mix_by_category
+from configuration.transfers import readJson
 
 
 class GetArticleByKeywords(TemplateView):
@@ -40,12 +40,13 @@ class GetMixedArticles(TemplateView):
     template_name = 'article/mixed_articles.html'
 
     def get(self, request, *args, **kwargs):
+        mixed_articles = readJson('configuration/json/webconfig.json')['mixed_articles']
         self.collect_articles = []
-        for mixed_article in mix_by_category:
-            self.collect_articles.append(Article.objects.filter(initial__category__name = mixed_article, language = kwargs['language']).order_by('-date_time')[:mix_by_category[mixed_article]])
+        for mixed_article in mixed_articles:
+            self.collect_articles.append(Article.objects.filter(initial__category__name = mixed_article, language = kwargs['language']).order_by('-date_time')[:mixed_articles[mixed_article]])
         all_actegories = [category.name for category in ArticleCategory.objects.all()]
         for category in all_actegories:
-            if not category in mix_by_category:
+            if not category in mixed_articles:
                 self.collect_articles.append(Article.objects.filter(initial__category__name = category, language = kwargs['language']).order_by('-date_time')[0:5])
         return super(GetMixedArticles, self).get(request, *args, **kwargs)
 

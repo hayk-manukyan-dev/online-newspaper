@@ -19,6 +19,7 @@ from article.views import GetArticleByKeywords, GetArticlesByCategory, GetMixedA
 
 from processing.views.main_view import EnteryLanguageDetect
 
+from configuration.views import MixedArticlesConfig
 
 
 urlpatterns = [
@@ -27,6 +28,9 @@ urlpatterns = [
     path('translate/<str:language>', changeLanguage),
 
     path(r'summernote/', include('django_summernote.urls')),
+
+    path('configuration/mixed_articles_view', TemplateView.as_view(template_name = 'configuration/mixed_articles_config_view.html')),
+    path('configuration/mixed_articles', MixedArticlesConfig.as_view()),
 
     path('', EnteryLanguageDetect.as_view()),
 

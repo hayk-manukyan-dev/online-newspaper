@@ -27,7 +27,7 @@ class SignUp(TemplateView):
         if self.form.is_valid():
             if recaptcha_response['success']:
                 user = get_user_model().objects.create_user(email = self.form.cleaned_data['email'], password = self.form.cleaned_data['password'], first_name = self.form.cleaned_data['first_name'], last_name = self.form.cleaned_data['last_name'])
-#               send_mail(str(request.META['HTTP_HOST']) + ' Cnfirm Email', 'Use %s to confirm your email' % user.confirmation_key, str(request.META['HTTP_HOST']), [user.email])
+                send_mail(str(request.META['HTTP_HOST']) + ' Cnfirm Email', 'Use %s to confirm your email' % user.confirmation_key, str(request.META['HTTP_HOST']), [user.email])
                 MessageManager().makeMessage(request, message = 'confirm_mail')
                 return redirect('/')
             MessageManager().makeMessage(request, message = 'confirm_not_robot')
@@ -197,7 +197,6 @@ def editLastName(request):
 def editAvatar(request):
     if request.method == 'POST':
         try:
-            print(request.FILES['avatar'])
             if request.FILES:
                 UserManager().save_image(request.user, request.FILES['avatar'])
                 return HttpResponse(Collect(response = 'success').get_json(), content_type = 'application/json')
