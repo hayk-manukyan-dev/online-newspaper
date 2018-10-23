@@ -6,7 +6,9 @@ from django.core.validators import EmailValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+from configuration.transfers import readJson
 
+models_config = readJson('configuration/json/models.json')
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -116,12 +118,12 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
-    email_confirmed = models.BooleanField(default = False)
-    avatar = models.ImageField(upload_to='avatars', default = 'images/avatars/static/avatar.jpg')
-    avatar_thumbnail = ImageSpecField(source='avatar',
-                                      processors=[ResizeToFill(100, 50)],
-                                      format='JPEG',
-                                      options={'quality': 90})
+    email_confirmed = models.BooleanField(default = models_config["User"]["email_confirmed"]["default"])
+    avatar = models.ImageField(upload_to = 'avatars', default = 'images/avatars/static/avatar.jpg')
+    avatar_thumbnail = ImageSpecField(source = 'avatar',
+                                      processors = [ResizeToFill(models_config["User"]["avatar_thumbnail"]["processors"]["ResizeToFill"][0], models_config["User"]["avatar_thumbnail"]["processors"]["ResizeToFill"][1])],
+                                      format = models_config["User"]["avatar_thumbnail"]["format"],
+                                      options = models_config["User"]["avatar_thumbnail"]["options"])
 
 
     USERNAME_FIELD = 'email'

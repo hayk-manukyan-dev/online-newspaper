@@ -7,6 +7,9 @@ import copy
 
 from processing.base.managers import Collect
 
+from configuration.transfers import readJson
+
+models_config = readJson('configuration/json/models.json')
 
 class InitialArticleManager(models.Manager):
 
@@ -42,7 +45,7 @@ class InitialArticleManager(models.Manager):
 class InitialArticle(models.Model):
     by = models.ForeignKey(get_user_model(), null=True, on_delete = models.SET_NULL)
     category = models.ForeignKey(ArticleCategory, null=True, on_delete=models.CASCADE)
-    keywords = models.CharField(max_length = 110, unique = True)
+    keywords = models.CharField(max_length = models_config["InitialArticle"]["keywords"]["max_length"], unique = True)
 
     objects = InitialArticleManager()
 

@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from datetime import datetime
 
+from configuration.transfers import readJson
+
+models_config = readJson('configuration/json/models.json')
+
 class BlackListManager(models.Manager):
     def email_exist_in_blacklist(self, email):
         try:
@@ -23,7 +27,7 @@ class BlackListManager(models.Manager):
 class BlackList(models.Model):
     by = models.ForeignKey(get_user_model(), null=True, on_delete = models.SET_NULL)
     email = models.EmailField(unique=True)
-    reason = models.CharField(max_length=2000, null=True, blank=True)
+    reason = models.CharField(max_length = models_config["BlackList"]["reason"]["max_length"], null=True, blank=True)
     date = models.DateField(auto_now_add = True)
     expire_in = models.DateField(null = True, blank = True)
 

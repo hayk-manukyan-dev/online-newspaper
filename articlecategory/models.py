@@ -1,5 +1,8 @@
 from django.db import models
 
+from configuration.transfers import readJson
+
+models_config = readJson('configuration/json/models.json')
 
 class ArticleCategoryManager(models.Manager):
     def get_article_categories(self, request):
@@ -8,8 +11,8 @@ class ArticleCategoryManager(models.Manager):
 
 
 class ArticleCategory(models.Model):
-    name = models.CharField(max_length = 100, unique = True)
-    description = models.CharField(max_length = 2000)
+    name = models.CharField(max_length = models_config["ArticleCategory"]["name"]["max_length"], unique = True)
+    description = models.CharField(max_length = models_config["ArticleCategory"]["description"]["max_length"])
 
     objects = ArticleCategoryManager()
 

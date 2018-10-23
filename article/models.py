@@ -8,6 +8,10 @@ from imagekit.processors import ResizeToFill
 
 from datetime import datetime
 
+from configuration.transfers import readJson
+
+models_config = readJson('configuration/json/models.json')
+
 class ArticleManager(models.Manager):
 
     def language_exist(self, keywords, language):
@@ -53,11 +57,11 @@ class ArticleManager(models.Manager):
 
 
 class Article(models.Model):
-    initial = models.ForeignKey(InitialArticle, on_delete=models.CASCADE)
+    initial = models.ForeignKey(InitialArticle, on_delete = models.CASCADE)
     language = models.CharField(max_length = 3, null = True, blank = True)
-    title = models.CharField(max_length = 200)
-    description = models.CharField(max_length = 500)
-    text = models.CharField(max_length = 1000)
+    title = models.CharField(max_length = models_config["Article"]["title"]["max_length"])
+    description = models.CharField(max_length = models_config["Article"]["description"]["max_length"])
+    text = models.CharField(max_length = models_config["Article"]["text"]["max_length"])
     main_image = models.ImageField(upload_to='article', default='article.jpg')
     date_time = models.DateTimeField(auto_now = True)
 

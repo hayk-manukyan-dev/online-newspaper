@@ -7,6 +7,7 @@ requirements.txt
 
 *.pyc
 .idea/
+.vscode/
 
 
 # Translations
@@ -18,6 +19,7 @@ locale/
 settings.py
 media/**
 static/**
+configuration/json/**
 
 # Environments
 venv/
