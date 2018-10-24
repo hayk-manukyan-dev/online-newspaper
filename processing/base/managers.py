@@ -43,6 +43,7 @@ class MessageManager(object):
             "logout_successful" : [_("Success log outed"), messages.info],
             "no_privileg_to_reach_this_page" : [_("You has no privileg to reach this page"), messages.error],
             "group_not_exist" : [_("Group is not exist or not possible to set"), messages.error],
+            "bad_request" : [_("Bad Request Error"), messages.error],
 
             "success_created" : [_('Success created'), messages.info],
             "success_edited" : [_("Success edited"), messages.info],

@@ -1,8 +1,13 @@
+from django.shortcuts import HttpResponse
 from django.views.generic.base import TemplateView
 from django.core.paginator import Paginator
 
 from article.models import Article
 from articlecategory.models import ArticleCategory
+
+import json
+
+from processing.base.managers import MessageManager, Collect
 
 from configuration.transfers import readJson
 
@@ -55,3 +60,11 @@ class GetMixedArticles(TemplateView):
         context['mixed_articles'] = self.collect_articles
         return context
 
+
+#-----ajax-----
+def getArticleJson(request, *args, **kwargs):
+    if request.method == 'GET':
+        article = Article.objects.get_article(kwargs['keywords'], language = kwargs['language'])
+        article = json.dumps(article)
+        return HttpResponse(article, content_type = 'application/json')
+    return HttpResponse(Collect(response = 'filure', message = str(MessageManager().getMessage('bad_request'))).get_json(), content_type = 'application/json')
