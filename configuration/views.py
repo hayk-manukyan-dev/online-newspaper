@@ -54,7 +54,7 @@ class MainArticles(View):
     def post(self, request, *args, **kwargs):
         web_config = readJson('configuration/json/webconfig.json')
         web_config['main_articles']['first'] = request.POST['first']
-        web_config['main_articles']['list'] = re.sub("[^\w]", " ", request.POST['list']).split()
+        web_config['main_articles']['list'] = re.sub(r"[^\w]", " ", request.POST['list']).split()
         write_to_file = writeJson('configuration/json/webconfig.json', web_config)
         if write_to_file:
             MessageManager().makeMessage(request, message = 'success_edited')

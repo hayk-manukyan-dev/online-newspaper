@@ -64,7 +64,7 @@ class EditInitialArticle(TemplateView):
         if InitialArticle.objects.initial_article_owner_is_requester(request, initial_article):
             self.form = InitialArticleEditForm(request.POST, instance = initial_article, request = request)
             if self.form.is_valid():
-                new_initial_article = self.form.save_(article_keywords_object = initial_article, user = request.user)
+                self.form.save_(article_keywords_object = initial_article, user = request.user)
                 return redirect('/initialarticle/userarticles')
             MessageManager().makeMessage(request, message='form_is_not_valid')
             return redirect(request.META.get('HTTP_REFERER'))
