@@ -1,0 +1,16 @@
+{% load i18n %}
+
+<form action="/configuration/main_articles" method="post">
+    {% csrf_token %}
+    <input type="input" name="first" id="first">
+    <div class="full-w height-s"></div>
+    <textarea name="list" class="form-control" id="list" rows="3"></textarea>
+    <div class="full-w height-s"></div>
+    <button type="submit" class="btn btn-primary" id="">{% trans 'Save' %}</button>
+    <script>
+        $.get("/configuration/main_articles", function (data){
+            $("#first").val(data.first);
+            $("#list").val(data.list);
+        })
+    </script>
+</form>

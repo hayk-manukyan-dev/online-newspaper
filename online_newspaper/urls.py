@@ -15,11 +15,11 @@ from group.views import addUserToGroup, removeUserFromGroup
 
 from initialarticle.views import CreateInitialArticle, EditInitialArticle, RequesterInitialarticles, removeInitialArticle
 from article.staff_views import  CreateArticle, EditArticle, removeArticle
-from article.views import GetArticleByKeywords, GetArticlesByCategory, GetMixedArticles
+from article.views import GetArticleByKeywords, GetArticlesByCategory, GetMixedArticles, getArticlePartHTML
 
 from processing.views.main_view import EnteryLanguageDetect
 
-from configuration.views import MixedArticlesConfig
+from configuration.views import MixedArticles, MainArticles
 
 
 urlpatterns = [
@@ -29,8 +29,10 @@ urlpatterns = [
 
     path(r'summernote/', include('django_summernote.urls')),
 
-    path('configuration/mixed_articles_view', TemplateView.as_view(template_name = 'configuration/mixed_articles_config_view.html')),
-    path('configuration/mixed_articles', MixedArticlesConfig.as_view()),
+    path('configuration/mixed_articles_view', TemplateView.as_view(template_name = 'configuration/web_config.html')),
+    path('configuration/mixed_articles', MixedArticles.as_view()),
+    path('configuration/main_articles', MainArticles.as_view()),
+    path('configuration/main_articles_form', TemplateView.as_view(template_name = 'configuration/main_articles_form.html')),
 
     path('', EnteryLanguageDetect.as_view()),
 
@@ -64,6 +66,7 @@ urlpatterns = [
     path('article/stuff/edit/<str:language>/<str:keywords>', EditArticle.as_view()),
     path('article/stuff/remove/<str:language>/<str:keywords>', removeArticle),
     path('article/get/<str:language>/<str:keywords>', GetArticleByKeywords.as_view(), name = 'article_get'),
+    path('article/getpart/<str:language>/<str:keywords>', getArticlePartHTML),
 
     path('article/category/<str:language>/<int:category_pk>/<int:page>', GetArticlesByCategory.as_view()),
     path('<str:language>', GetMixedArticles.as_view()),

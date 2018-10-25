@@ -50,6 +50,35 @@
         </div>
       </div>
 
+
+      <div class="container">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10 border border-light rounded shadow p-3 mb-5 bg-white">
+            <h3 class="text-center">Main Articles Configuration</h3>
+
+            <div class="container">
+              <div class="row">
+                <div class="col- col-md-1"></div>
+                <div class="col-12 col-md-10 border border-light rounded shadow p-3 mb-5 bg-white">
+                  <div class="container" id="main_articles_form">
+                    
+                  </div>
+                  <script>
+                    $.get("/configuration/main_articles_form", function (data){
+                      $("#main_articles_form").append(data)
+                    })
+                  </script>
+                  <div class="full-w height-s"></div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
   </div>
 
 {% endblock %}

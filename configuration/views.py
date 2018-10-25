@@ -8,10 +8,10 @@ from processing.base.decorators import group_required, exception_redirect
 from configuration.transfers import readJson, writeJson, mixedArticlesSave, getMemoryJsonData
 from processing.base.managers import MessageManager, Collect
 
-import json
+import json, re
 
 
-class MixedArticlesConfig(View):
+class MixedArticles(View):
 
     @method_decorator(exception_redirect)
     @method_decorator(login_required)
@@ -36,3 +36,29 @@ class MixedArticlesConfig(View):
             return redirect(request.META.get('HTTP_REFERER'))
         MessageManager().makeMessage(request, message = 'unsupported_file_type')
         return redirect(request.META.get('HTTP_REFERER'))
+
+
+class MainArticles(View):
+    
+    @method_decorator(exception_redirect)
+    @method_decorator(login_required)
+    @method_decorator(group_required('admin', HttpResponse(MessageManager().getMessage(message = 'no_privileg_to_reach_this_page'))))
+    def get(self, request, *args, **kwargs):
+        main_articles = readJson('configuration/json/webconfig.json')['main_articles']
+        print(main_articles)
+        return HttpResponse(json.dumps(main_articles), content_type = 'application/json')
+
+    @method_decorator(exception_redirect)
+    @method_decorator(login_required)
+    @method_decorator(group_required('admin', HttpResponse(MessageManager().getMessage(message = 'no_privileg_to_reach_this_page'))))
+    def post(self, request, *args, **kwargs):
+        web_config = readJson('configuration/json/webconfig.json')
+        web_config['main_articles']['first'] = request.POST['first']
+        web_config['main_articles']['list'] = re.sub("[^\w]", " ", request.POST['list']).split()
+        write_to_file = writeJson('configuration/json/webconfig.json', web_config)
+        if write_to_file:
+            MessageManager().makeMessage(request, message = 'success_edited')
+            return redirect(request.META.get('HTTP_REFERER'))
+        MessageManager().makeMessage(request, message = 'problem_with_save')
+        return redirect(request.META.get('HTTP_REFERER'))
+        

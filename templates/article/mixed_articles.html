@@ -27,36 +27,32 @@
 
       <div class="row">
 
-        <div class="col-12 col-sm-8" style="display:none">
-          <a href="/article/get/{{ language_code }}/{{ article.initial.keywords }}" class="link-none-underline">
-            <div class="card mb-4">
-                <img class="card-img-top" src="some00615.jpg" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ bg_article.title }}</h5>
-                    <p class="card-text">{{ bg_article.description }}</p>
-                    <p class="card-text"><small class="text-muted">{{ bg_article.date_time }}</small></p>
-                </div>
-            </div>
-          </a>
+        <div class="col-12 col-sm-8" style="display:none" id="main-article-block">
+        <script>
+            $.get("/article/getpart/{{ language_code }}/2018-2018-Donald Tramp says something new", function(data){
+                $("#main-article-block").append(data);
+                $("#main-article-block").show();
+            })
+        </script>
         </div>
 
 
-            {% for list_articles in mixed_articles %}
-                {% for article in list_articles %}
-                    <div class="col-12 col-sm-4">
-                        <a href="/article/get/{{ language_code }}/{{ article.initial.keywords }}" class="link-none-underline">
-                            <div class="card mb-4">
-                                <img class="card-img-top" src="/media/{{ article.main_image }}" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ article.title }}</h5>
-                                    <p class="card-text">{{ article.description }}</p>
-                                    <p class="card-text"><small class="text-muted">{{ article.date_time }}</small></p>
-                                </div>
+        {% for list_articles in mixed_articles %}
+            {% for article in list_articles %}
+                <div class="col-12 col-sm-4">
+                    <a href="/article/get/{{ language_code }}/{{ article.initial.keywords }}" class="link-none-underline">
+                        <div class="card mb-4">
+                            <img class="card-img-top" src="/media/{{ article.main_image }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text">{{ article.description }}</p>
+                                <p class="card-text"><small class="text-muted">{{ article.date_time }}</small></p>
                             </div>
-                        </a>
-                    </div>
-                {% endfor %}
+                        </div>
+                    </a>
+                </div>
             {% endfor %}
+        {% endfor %}
 
       </div>
     </div>

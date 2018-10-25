@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, render
 from django.views.generic.base import TemplateView
 from django.core.paginator import Paginator
 
@@ -61,10 +61,8 @@ class GetMixedArticles(TemplateView):
         return context
 
 
-#-----ajax-----
-def getArticleJson(request, *args, **kwargs):
+def getArticlePartHTML(request, *args, **kwargs):
     if request.method == 'GET':
         article = Article.objects.get_article(kwargs['keywords'], language = kwargs['language'])
-        article = json.dumps(article)
-        return HttpResponse(article, content_type = 'application/json')
+        return render(request, 'article/article_card.html', {'article' : article})
     return HttpResponse(Collect(response = 'filure', message = str(MessageManager().getMessage('bad_request'))).get_json(), content_type = 'application/json')
