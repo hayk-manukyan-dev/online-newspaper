@@ -36,13 +36,14 @@
                 <div class="full-w height-s"></div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="stable_part">{% now 'Y' %}-</span>
+                        <span class="input-group-text" id="stable_part">{% now 'Y' %}_</span>
                     </div>
                     {{ create_initial_article_fileds.keywords }}
                 </div>
               <div class="full-w height-s"></div>
               </div>
-              <button type="submit" class="btn btn-primary" onclick="addDateToKeywords()">{% trans "Save" %}</button>
+              <button type="button" class="btn btn-primary" onclick="replaceTextAndSubmit('id_keywords')">{% trans "test" %}</button>
+              <button type="submit" class="btn btn-primary" onclick="replaceTextAndSubmit('id_keywords')">{% trans "Save" %}</button>
               <div class="full-w height-m"></div>
             </form>
           </div>
@@ -58,11 +59,16 @@
         $(form).submit();
     }
 
-    function addDateToKeywords(){
-        var keywords_text = $('#id_keywords').val();
-        var stable_part = $('#stable_part').text();
-        $('#id_keywords').val(stable_part + keywords_text);
-        submit_('#save_initial_article');
+    function replaceTextAndSubmit(id){
+	    var stable_part = $('#stable_part').text();
+      $("#" + id).val(function (i, value) {
+        if (value.slice( 0, 5 ) != stable_part){
+          value = stable_part + value;
+        }
+        return value.replace(/[ -]/g, '_');
+	    });
+      $("body").css({"cursor" : "wait !important"}).delay(1000).submit_('#save_initial_article');
+      $("body").css({"cursor" : "auto"});
     }
   </script>
 

@@ -29,7 +29,7 @@ urlpatterns = [
 
     path(r'summernote/', include('django_summernote.urls')),
 
-    path('configuration/mixed_articles_view', TemplateView.as_view(template_name = 'configuration/web_config.html')),
+    path('configuration/web', TemplateView.as_view(template_name = 'configuration/web_config.html')),
     path('configuration/mixed_articles', MixedArticles.as_view()),
     path('configuration/main_articles', MainArticles.as_view()),
     path('configuration/main_articles_form', TemplateView.as_view(template_name = 'configuration/main_articles_form.html')),

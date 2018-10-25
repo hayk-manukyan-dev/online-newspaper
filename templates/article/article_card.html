@@ -1,3 +1,6 @@
+{% load i18n %}
+{% get_current_language as language_code %}
+
 <a href="/article/get/{{ language_code }}/{{ article.initial.keywords }}" class="link-none-underline">
     <div class="card mb-4">
         <img class="card-img-top" src="/media/{{ article.main_image }}" alt="Card image cap">

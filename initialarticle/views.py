@@ -29,8 +29,11 @@ class CreateInitialArticle(TemplateView):
     def post(self, request, *args, **kwargs):
         self.form = InitialArticleCreateForm(request.POST, request = request)
         if self.form.is_valid():
-            initial_aticle = self.form.save(request.user)
-            return redirect('/article/stuff/create/'+ request.LANGUAGE_CODE +'/' + str(initial_aticle.keywords))
+            initial_article = self.form.save(request.user)
+            if initial_article:
+                return redirect('/article/stuff/create/'+ request.LANGUAGE_CODE +'/' + str(initial_article.keywords))
+            MessageManager().makeMessage(request, message = 'keywords_exists')
+            return redirect(request.META.get('HTTP_REFERER'))
         MessageManager().makeMessage(request, message = 'form_is_not_valid')
         return redirect(request.META.get('HTTP_REFERER'))
 

@@ -37,7 +37,8 @@ class MessageManager(object):
                 _('Somthing went wrong, login was not applied. Look here for additional information'),
                 messages.warning],
             "problem_with_save" : [_("Somthing went wrong, please try again"), messages.warning],
-            "unsupported_file_type": ["Unsupported file type", False, messages.error],
+            "unsupported_file_type": ["Unsupported file type", messages.error],
+            "keywords_exists" : [_("The keywords already exists. Please use a different one"), messages.error],
 
             "form_is_not_valid" : [_("Entered som characters or field is not valid please check fields and try again to save"), messages.warning],
             "logout_successful" : [_("Success log outed"), messages.info],
