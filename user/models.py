@@ -108,6 +108,14 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
+<<<<<<< HEAD
+=======
+    def delete(self, *args, **kwargs):#not work in admin
+        self.avatar.delete(save = False)
+        self.avatar.delete()
+        super(UserManager, self).delete(*args, **kwargs)
+
+>>>>>>> c6b219c7aa7c69209dbbe3b4127a08e66ec7d811
 
 
 class User(AbstractUser):
@@ -134,10 +142,13 @@ class User(AbstractUser):
                 field.upload_to = 'images/avatars/' + str(self.email)
         super(User, self).save(*args, **kwargs)
 
+<<<<<<< HEAD
     def delete(self, *args, **kwargs):#not work in admin
         self.avatar.delete(save = False)
         self.avatar.delete()
         super(UserManager, self).delete(*args, **kwargs)
 
+=======
+>>>>>>> c6b219c7aa7c69209dbbe3b4127a08e66ec7d811
     def __str__(self):
         return str(self.email)
