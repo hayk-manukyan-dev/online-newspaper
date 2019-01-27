@@ -2,11 +2,10 @@ from django import forms
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
 from blacklist.models import BlackListManager
-<<<<<<< HEAD
+
 from user.models import User, UserManager
-=======
 from user.models import User
->>>>>>> c6b219c7aa7c69209dbbe3b4127a08e66ec7d811
+
 from django.contrib.auth import get_user_model
 from user.models import UserManager
 from django.forms.widgets import HiddenInput
@@ -14,8 +13,6 @@ from django.core.mail import send_mail
 from online_newspaper.settings import ALLOWED_HOSTS
 
 
-
-<<<<<<< HEAD
 class SignUpFormValidation(BlackListManager, UserManager):
     def email_exist_in_blacklist(self, email):
         in_blacklist_exist = super(SignUpFormValidation, self).email_exist_in_blacklist(email)
@@ -26,13 +23,11 @@ class SignUpFormValidation(BlackListManager, UserManager):
             raise ValidationError(_('%(email) is exist'), params={'email' : email})
 
 
-=======
 class SignUpFormValidation(BlackListManager):
     def email_exist_in_blacklist(self, email):
         is_exist = super(SignUpFormValidation, self).email_exist_in_blacklist(email)
         if is_exist:
             raise ValidationError(_('%(email) is exist in black list'), params={'email': email},)
->>>>>>> c6b219c7aa7c69209dbbe3b4127a08e66ec7d811
 
 
 class SignUpForm(forms.Form):
