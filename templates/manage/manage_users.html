@@ -43,37 +43,61 @@
                 {% for user in users %}
                 <tr>
                   <td>
-                    <p>{{ user.first_name }}{{ user.last_name }}</p> <p class="text-muted"><small>{{ user.email }}</small></p>
+                    <p>{{ user.first_name }} {{ user.last_name }}</p> <p class="text-muted"><small>{{ user.email }}</small></p>
                   </td>
                     {% if user|has_group:"moderator"  %}
                         <td class="text-center">
-                            <a type="button" class="btn btn-outline-dark" href="/admin/remove/userfromgroup/{{ user.pk }}/moderator">
-                                <i class="fas fa-times"></i>
-                            </a>
-                            <p class="text-muted"><small>{% trans "Is not Moderator" %}</small></p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5"></div>
+                                    <div class="col-2 text-center">
+                                        <input class="form-check-input" type="checkbox" onchange="window.location.href='/admin/remove/userfromgroup/{{ user.pk }}/moderator'" checked>
+                                    </div>
+                                    <div class="col-5"></div>
+                                </div>
+                            </div>
+                            <!--<p class="text-muted"><small>{% trans "Is Moderator" %}</small></p>-->
                         </td>
                     {% else %}
                         <td class="text-center">
-                            <a type="button" class="btn btn-outline-primary" href="/admin/add/useringroup/{{ user.pk }}/moderator">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <p class="text-muted"><small>{% trans "Is Moderator" %}</small></p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5"></div>
+                                    <div class="col-2">
+                                        <input class="form-check-input" type="checkbox" onchange="window.location.href='/admin/add/useringroup/{{ user.pk }}/moderator'">
+                                    </div>
+                                    <div class="col-5"></div>
+                                </div>
+                            </div>
+                            <!--<p class="text-muted"><small>{% trans "Is not Moderator" %}</small></p>-->
                         </td>
                     {% endif %}
 
                     {% if user|has_group:"stuff"  %}
                         <td class="text-center">
-                            <a type="button" class="btn btn-outline-dark" href="/admin/remove/userfromgroup/{{ user.pk }}/stuff">
-                                <i class="fas fa-times"></i>
-                            </a>
-                            <p class="text-muted"><small>{% trans "Is not Stuff" %}</small></p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5"></div>
+                                    <div class="col-2 text-center">
+                                        <input class="form-check-input" type="checkbox" onchange="window.location.href='/admin/remove/userfromgroup/{{ user.pk }}/stuff'" checked>
+                                    </div>
+                                    <div class="col-5"></div>
+                                </div>
+                            </div>
+                            <!--<p class="text-muted"><small>{% trans "Is Stuff" %}</small></p>-->
                         </td>
                     {% else %}
                         <td class="text-center">
-                            <a type="button" class="btn btn-outline-primary" href="/admin/add/useringroup/{{ user.pk }}/stuff">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <p class="text-muted"><small>{% trans "Is Stuff" %}</small></p>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-5"></div>
+                                    <div class="col-2 text-center">
+                                        <input class="form-check-input" type="checkbox" onchange="window.location.href='/admin/add/useringroup/{{ user.pk }}/stuff'">
+                                    </div>
+                                    <div class="col-5"></div>
+                                </div>
+                            </div>
+                            <!--<p class="text-muted"><small>{% trans "Is not Stuff" %}</small></p>-->
                         </td>
                     {% endif %}
                 </tr>
