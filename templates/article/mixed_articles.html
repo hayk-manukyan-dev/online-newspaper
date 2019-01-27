@@ -1,0 +1,60 @@
+{% extends 'header_footer.html' %}
+{% load get_categories %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+
+    <div id="middle" class="container">
+
+      <div class="container buttom-border">
+        <div class="row text-center">
+          {% for category in request|all_categories %}
+            <div class="col-4 col-sm-3">
+                <a href="/article/category/{{ language_code }}/{{ category.pk }}/1" class="text-dark">
+                    <b>{{ category.name }}</b>
+                </a>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="full-w height-s"></div>
+      </div>
+
+      <div class="full-w height-s"></div>
+
+      <div class="row">
+
+        <div class="col-12 col-sm-8" style="display:none" id="main-article-block">
+        <script>
+            $.get("/article/getpart/{{ language_code }}/2018-2018-Donald Tramp says something new", function(data){
+                $("#main-article-block").append(data);
+                $("#main-article-block").show();
+            })
+        </script>
+        </div>
+
+
+        {% for list_articles in mixed_articles %}
+            {% for article in list_articles %}
+                <div class="col-12 col-sm-4">
+                    <a href="/article/get/{{ language_code }}/{{ article.initial.keywords }}" class="link-none-underline">
+                        <div class="card mb-4">
+                            <img class="card-img-top" src="/media/{{ article.main_image }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ article.title }}</h5>
+                                <p class="card-text">{{ article.description }}</p>
+                                <p class="card-text"><small class="text-muted">{{ article.date_time }}</small></p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+      </div>
+    </div>
+
+{% endblock %}

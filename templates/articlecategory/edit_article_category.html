@@ -1,0 +1,47 @@
+{% extends 'header_footer.html' %}
+{% load i18n %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+    <div id="middle" class="container">
+
+      <div class="container mt-3 mb-3">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10">
+            <span class="badge badge-light">
+              <a href="#" class="text-secondary">
+                <b><i class="fas fa-angle-double-left"></i>{% trans "Go back" %}</b>
+              </a>
+            </span>
+          </div>
+          <div class="col- col-md-1"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-1 col-md-4"></div>
+          <div class="col-10 col-md-4 border border-light rounded shadow p-3 mb-5 bg-white">
+            <h3 class="text-center">{% trans "Create Category" %}</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ article_category_form.name }}
+                <div class="full-w height-s"></div>
+                {{ article_category_form.description }}
+              <div class="full-w height-s"></div>
+              <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+              <div class="full-w height-m"></div>
+            </form>
+          </div>
+          <div class="col-1 col-md-4"></div>
+        </div>
+      </div>
+
+    </div>
+
+{% endblock %}

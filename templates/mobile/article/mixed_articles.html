@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load i18n %}
+
+
+<html>
+  <head>
+
+		{% block head %}{% endblock %}
+
+	  	<title>main</title>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="{% static 'librarys/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'librarys/popper.min.js' %}"></script>
+
+        <link rel="stylesheet" href="{% static 'librarys/bootstrap-4.1.1/dist/css/bootstrap.css' %}">
+        <script src="{% static 'librarys/bootstrap-4.1.1/dist/js/bootstrap.js' %}"></script>
+        <script src="{% static 'fontawesome-free-5.1.0-web/js/all.js' %}"></script>
+        <script src="{% static 'scripts/base/csrf_token.js' %}"></script>
+
+
+
+  </head>
+
+  <body>
+<h1>MOBILE</h1>
+
+
+  {% for message in messages %}
+    {{ message }}
+  {% endfor %}
+
+
+  {{ request.META.HTTP_HOST }}
+  {{ request.user.email }}
+
+
+  {% for list_articles in mixed_articles %}
+    {% for article in list_articles %}
+    <br><br>
+    {{ article.title }}
+    <div>{{ article.text|safe }}</div>
+    {{ article.date_time }}
+    {% endfor %}
+  {% endfor %}
+
+<a href="/switch/desktop">sw</a>
+
+  </body>
+</html>

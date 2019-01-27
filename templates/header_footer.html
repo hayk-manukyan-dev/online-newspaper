@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load i18n %}
+{% load group_tags %}
+{% get_current_language as language_code %}
+{% get_available_languages as languages %}
+
+<html>
+
+  <head>
+
+		{% block head %}{% endblock %}
+
+	  	<title>main</title>
+		<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script src="{% static 'libraries/jquery-3.3.1.min.js' %}"></script>
+        <script src="{% static 'libraries/popper.min.js' %}"></script>
+
+        <link rel="stylesheet" href="{% static 'libraries/bootstrap-4.1.1/dist/css/bootstrap.css' %}">
+        <script src="{% static 'libraries/bootstrap-4.1.1/dist/js/bootstrap.js' %}"></script>
+        <script src="{% static 'libraries/fontawesome-free-5.1.0-web/js/all.js' %}"></script>
+        <script src="{% static 'scripts/base/csrf_token.js' %}"></script>
+        <script src="{% static 'scripts/templates/user/edit_user.js' %}"></script>
+
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+  </head>
+
+  <body>
+
+      <div class="menu" id="menu">
+        <div class="container">
+            <div class="menu-but-container container-fluid">
+                <button class="btn symbol btn-outline-secondary h3" onclick="closeMenu()"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="text-center">
+                <div class="media">
+                    <img class="profile-img horizontal-align-center" src="/media/{{ request.user.avatar }}">
+                </div>
+            </div>
+            <h2 class="text-muted cursor-default">{{ request.user.first_name }} {{ request.user.last_name }}</h2>
+            {% if request.user.is_authenticated %}
+                {% if request.user|has_group:"stuff" %}
+                    <div class="full-w height-m"></div>
+                    <p class="text-muted cursor-default h6"><small>{% trans "Stuff" %}</small></p>
+                    <a class="dropdown-item" href="/initialarticle/create">{% trans "Create Article" %}</a>
+                    <a class="dropdown-item" href="/initialarticle/userarticles">{% trans "My Articles"%}</a>
+                {% endif %}
+                {% if request.user|has_group:"admin" %}
+                    <div class="full-w height-m"></div>
+                    <p class="text-muted cursor-default h6"><small>{% trans "Admin" %}</small></p>
+                    <a class="dropdown-item" href="/admin/getusers">{% trans "Manage Users" %}</a>
+                    <a class="dropdown-item" href="/articlecategory/getall">{% trans "Manage Categories" %}</a>
+                    <a class="dropdown-item" href="/configuration/web">{% trans "Web Configutarions" %}</a>
+                {% endif %}
+                    <div class="full-w height-m"></div>
+                    <a class="dropdown-item" href="/user/edit">{% trans "Edit Profile" %}</a>
+                    <a class="dropdown-item" href="/user/logout">{% trans "Log Out" %}</a>
+            {% endif %}
+        </div>
+      </div>
+
+      <div class="full-w height-m"></div>
+      <div id="header" class="full-w">
+          <div class="container">
+          {% if messages %}
+            <div class="caontainer">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}{{ message.tags }}{% endif %} alert-dismissible fade show mt-2 mb-1 shadow p-3 mb-5 bg-white rounded" role="alert">
+                    <strong>{% if message.tags %}{{ message.tags }}{% endif %}! </strong>{{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+            </div>
+          {% endif %}
+
+            <div class="row">
+                <div class="col-sm-4 col-2">
+                    <a class="center logo" id="dropdownLanguagesMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <h5>{{ language_code }} <span class="badge badge-secondary"><i class="fas fa-language"></i></span></h5>
+                    </a>
+                    <div class="dropdown-menu text-center" aria-labelledby="dropdownLanguagesMenu">
+                        {% for language in languages %}
+                        <a class="dropdown-item" href="/translate/{{ language.0 }}">{{ language.1 }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-8">
+                    <a href="/{{ language_code }}">
+                        <div class="media">
+                            <img src="/media/web/logo.png" alt="Logo" />
+                        </div>
+                    </a>
+                </div>
+                {% if request.user.is_authenticated %}
+                <div class="col-sm-4 col-2">
+                    <div id="account-angle" class="center inline-block">
+                        <h4>
+                            <button class="btn symbol btn-outline-secondary h3" onclick="openMenu()">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </h4>
+                    </div>
+                </div>
+                {% else %}
+                <div id="authentication" class="col-sm-4 col-2">
+                    <a class="center logo" id="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <h4><i class="fas fa-sign-in-alt"></i></h4>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="dropdownAccountMenu">
+                        <a class="dropdown-item" href="/user/signup">{% trans "Sing Up" %}</a>
+                        <a class="dropdown-item" href="/user/login">{% trans "Log In" %}</a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+          </div>
+      </div>
+
+
+
+  {% block middle %}
+  {% endblock %}
+
+
+
+      <div id="footer" class="bg-primary full-w">
+
+        <div class="full-w height-l"></div>
+        <div class="container">
+            <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="media mr-5 footer-logo">
+                            <img src="/media/web/logo.png" alt="Logo" />
+                        </div>
+                    </div>
+                <div class="col-12 col-md-4">
+                    <ul class="ul font-color-white">
+                        <li class="li"><b>Project</b></li>
+                        <li class="li"><a class="text-light" href="/st/documentation">Documentation</a></li>
+                        <li class="li"><a class="text-light" href="/st/source_code">Source Code</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-4">
+                    <ul class="ul font-color-white">
+                        <li class="li"><b>Website</b></li>
+                        <li class="li">None</li>
+                        <li class="li">None none</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="full-w height-s"></div>
+      </div>
+
+      <script>
+      function openMenu(){
+        $('#menu').css('width', '50%');
+      }
+      function closeMenu(){
+        $('#menu').css('width', '0%');
+      };
+      </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+{% extends 'header_footer.html' %}
+{% load i18n %}
+{% load initialarticle_filter %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+    <div id="middle" class="container">
+
+      <div class="container mt-3 mb-3">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10">
+            <span class="badge badge-light">
+              <a href="#" class="text-secondary">
+                <b><i class="fas fa-angle-double-left"></i> Go back</b>
+              </a>
+            </span>
+          </div>
+          <div class="col- col-md-1"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col- col-md-1"></div>
+          <div class="col-12 col-md-10 border border-light rounded shadow p-3 mb-5 bg-white">
+            <h3 class="text-center">Articles</h3>
+
+            {% for initialarticle in initialarticles %}
+                <div class="container col-12 col-md-12 border rounded p-2 mb-4 bg-white">
+                    <a href="#">{{ initialarticle.keywords }}</a>
+                    <a href="/initialarticle/edit/{{ initialarticle.keywords }}" class="text-primary pl-3">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/initialarticle/remove/{{ initialarticle.keywords }}" class="text-danger pl-3">
+                        <i class="fas fa-trash"></i>
+                    </a>
+
+                {% for article in initialarticle|get_articles %}
+                    <div class="container border border-secondary rounded-right border-left-1 border-top-0 border-right-0 border-bottom-0 hover-bg-light">
+                        <div class="row p-2">
+                            <div class="col-8">
+                                <a href="#">{{ article.title }} <small class="text-secondary">{{ article.language }}</small></a>
+                            </div>
+                            <div class="col-4 text-right">
+                                <a href="/article/stuff/edit/{{ article.language }}/{{ initialarticle.keywords }}" class="text-primary h5">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a href="/article/stuff/remove/{{ article.language }}/{{ initialarticle.keywords }}" class="text-danger h5">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for possible_language in initialarticle|possible_languges %}
+                    <div class="container hover-bg-light">
+                        <div class="row p-2">
+                            <div class="col-8">
+                                <p>{{ possible_language.label }}</p>
+                            </div>
+                            <div class="col-4 text-right">
+                                <a class="btn btn-outline-primary btn-sm" href="/article/stuff/create/{{ possible_language.code }}/{{ initialarticle.keywords }}"><i class="fas fa-plus"></i> {% trans "Add"%}</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="col- col-md-1"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}

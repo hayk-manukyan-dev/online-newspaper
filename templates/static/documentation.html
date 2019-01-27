@@ -1,0 +1,56 @@
+{% extends 'header_footer.html' %}
+
+    {% block head %}
+        <title>Online-newspaper</title>
+    {% endblock %}
+
+{% block middle %}
+
+    <div id="middle" class="container">
+        <div class="container">
+            <h5 class="text-primary"><a href="https://github.com/haykhman/online-newspaper/blob/master/LICENSE" target="_blank">MIT License</a></h5>
+            <div class="full-w height-s"></div>
+            <p class="h3 text-primary">Project Use</p>
+            <p class="">&nbsp django-imagekit v4.0.2 <a href="https://github.com/matthewwithanm/django-imagekit" target="_blank">GitHub</a></p>
+            <p>&nbsp django-simple-email-confirmation v0.23 <a href="https://github.com/mfogel/django-simple-email-confirmation" target="_blank">GitHub</a></p>
+            <p>&nbsp django_summernote v0.8.10.0 <a href="https://github.com/summernote/django-summernote" target="_blank">GitHub</a></p>
+            <p>&nbsp django-recaptcha  v1.4.0 <a href="https://github.com/praekelt/django-recaptcha" target="_blank">GitHub</a></p>
+            <p>&nbsp transliterate v1.10.1 <a href="https://pypi.org/project/transliterate/" target="_blank">pypi.org</a></p>
+            <p>&nbsp JQuery v3.3.1 <a href="https://jquery.com/" target="_blank">JQuery</a></p>
+            <p>&nbsp Bootstrap v4.1.1 <a href="http://getbootstrap.com/" target="_blank">Bootstrap</a></p>
+            <p>&nbsp Fontawesome free v5.1.0 <a href="https://fontawesome.com/" target="_blank">Fontawesome</a></p>
+            <p>&nbsp popper.js <a href="https://popper.js.org/" target="_blank">popper.js.org</a></p>
+            <h3 class="text-primary">Settings</h3>
+            <p>&nbsp In project files not exist settings.py. Add it and set minimal requirments</p>
+            <p class="text-secondary">&nbsp &nbsp Set one or more <a href="#language">language</a></p>
+            <p class="text-secondary">&nbsp &nbsp Set GOOGLE_RECAPTCHA_SECRET_KEY <a href="https://github.com/praekelt/django-recaptcha">django-recaptcha
+            </a></p>
+            <p class="text-secondary">&nbsp &nbsp Add <a href="#mix_by_category">mix_by_category</a> named dictionary variable</p>
+            <h3 class="text-primary">Setup</h3>
+            <p>&nbsp Add this applications in INSTALLED_APPS and migrate in order.</p>
+            <p class="text-secondary">&nbsp &nbsp 1. user</p>
+            <p class="text-secondary">&nbsp &nbsp 2. blacklist</p>
+            <p class="text-secondary">&nbsp &nbsp 3. articlecategory</p>
+            <p class="text-secondary">&nbsp &nbsp 4. initialarticle</p>
+            <p class="text-secondary">&nbsp &nbsp 5. article</p>
+            <p class="text-secondary">&nbsp &nbsp imagekit, simple_email_confirmation, django_summernote</p>
+            <p class="text-secondary">&nbsp &nbsp migrate wihout app name</p>
+            <p class=""> &nbsp Afther complete migration enter to admin panel in online-newspaper/admin and create groups stuff, moderator and admin</p>
+            <p> &nbsp Add JQuery, Bootstrap, Fontawesome and popper.js in static folder for using default templaes</p>
+            <p>static folder map</p>
+            <img src="https://downloader.disk.yandex.ru/preview/ec1045b5b4177f814585ad96f35d874534d330b555d51661f157f0150d994ffa/5bad7a2d/ABYWCEpPZPMyPcy7zC7n4TqAvIuTSwX2zT0jhlBrMIfaiLmZZkaGkz5QXhyVOrs5MAXEmP3dpXZOTo6AF7qSXA%3D%3D?uid=0&filename=static-folders-map.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&tknv=v2&size=1366x639">
+            <p id="language" class="h3 text-primary">Languages</p>
+            <p class="">&nbsp Article multilanguage system work with settings LANGUAGES. Possible create  only in existed language of settings.LANGUAGES</p>
+            <h3 class="text-primary">Template Direct</h3>
+            <p class="">&nbsp For custom templates need to create templates schema same of existed in one direct higher and edit TEMPLATES DIRS in settings</p>
+            <h3 class="text-primary">Files and dirs</h3>
+            <p>&nbsp Default avatar - in media/images/avatars/ add avatar.jpg file</p>
+            <p>&nbsp Logo - in media/web/ add logo.png file</p>
+            <h3 id="mix_by_category" class="h3 text-primary">mix_by_category</h3>
+            <p>&nbsp It will mix articles by category</p>
+            <p>&nbsp Usage - set as key name of category and as value number of articles</p>
+            <p><small></small></p>
+        </div>
+    </div>
+
+{% endblock %}

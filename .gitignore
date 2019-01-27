@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+migrations/
+requirements.txt
+
+.git/
+
+*.pyc
+.idea/
+.vscode/
+
+
+# Translations
+locale/
+*.mo
+*.po
+
+# Django stuff:
+settings.py
+media/**
+static/**
+configuration/json/**
+
+# Environments
+venv/
