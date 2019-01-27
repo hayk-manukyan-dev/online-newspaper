@@ -54,10 +54,10 @@ class UserManager(BaseUserManager):
 
     def valid_email(self, email):
         if self.find_email(email):
-            return False
-#        from blacklist.models import BlackListManager
-#        if BlackListManager().email_exist_in_blacklist(email) != True:
-            email_validator = str#EmailValidator()
+            return False 
+        from blacklist.models import BlackListManager       
+        if BlackListManager().email_exist_in_blacklist(email) != True:
+            email_validator = EmailValidator()
         try:
             email_validator(email)
             return True
