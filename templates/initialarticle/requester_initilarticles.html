@@ -32,14 +32,14 @@
 
             {% for initialarticle in initialarticles %}
                 <div class="container col-12 col-md-12 border rounded p-2 mb-4 bg-white">
-                    <a href="#">{{ initialarticle.keywords }}</a>
-                    <a href="/initialarticle/edit/{{ initialarticle.keywords }}" class="text-primary pl-3">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                    <a href="/initialarticle/remove/{{ initialarticle.keywords }}" class="text-danger pl-3">
-                        <i class="fas fa-trash"></i>
-                    </a>
-
+                    <p class="border-bottom">{{ initialarticle.keywords }}
+                        <a href="/initialarticle/edit/{{ initialarticle.keywords }}" class="text-primary pl-3 h6">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="/initialarticle/remove/{{ initialarticle.keywords }}" class="text-danger pl-3 h6">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </p>
                 {% for article in initialarticle|get_articles %}
                     <div class="container border border-secondary rounded-right border-left-1 border-top-0 border-right-0 border-bottom-0 hover-bg-light">
                         <div class="row p-2">
@@ -47,10 +47,10 @@
                                 <a href="#">{{ article.title }} <small class="text-secondary">{{ article.language }}</small></a>
                             </div>
                             <div class="col-4 text-right">
-                                <a href="/article/stuff/edit/{{ article.language }}/{{ initialarticle.keywords }}" class="text-primary h5">
+                                <a href="/article/stuff/edit/{{ article.language }}/{{ initialarticle.keywords }}" class="text-primary pl-2">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="/article/stuff/remove/{{ article.language }}/{{ initialarticle.keywords }}" class="text-danger h5">
+                                <a href="/article/stuff/remove/{{ article.language }}/{{ initialarticle.keywords }}" class="text-danger pl-2">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>
