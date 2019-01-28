@@ -18,6 +18,7 @@ from article.staff_views import  CreateArticle, EditArticle, removeArticle
 from article.views import GetArticleByKeywords, GetArticlesByCategory, GetMixedArticles, getArticlePartHTML
 
 from processing.views.main_view import EnteryLanguageDetect
+from processing.views.windows import conirmationWindow
 
 from configuration.views import MixedArticles, MainArticles
 
@@ -70,6 +71,8 @@ urlpatterns = [
 
     path('article/category/<str:language>/<int:category_pk>/<int:page>', GetArticlesByCategory.as_view()),
     path('<str:language>', GetMixedArticles.as_view()),
+
+    path('window/confirm/<str:message>', conirmationWindow),
 
     #static folder
     path('st/documentation', TemplateView.as_view(template_name = 'static/documentation.html')),

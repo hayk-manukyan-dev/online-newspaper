@@ -1,0 +1,27 @@
+{% load i18n %}
+
+<div class="bg-transparent z-index-1  text-center" style="width: 100%; height: 100%;">
+    <div class="container rounded border bg-light center window">
+        <div class="full-w height-s"></div>
+        <div class="container">
+            <p>{{ message }}</p>
+        </div>
+        <div>
+            <button class="btn btn-primary mr-2">{% trans "Yes" %}</button>
+            <button class="btn btn-alert ml-2">{% trans "No"%}</button>
+        </div>
+        <div class="full-w height-s"></div>
+    </div>
+</div>
+
+<script>
+
+      var width = $(document).width();
+      if(width >= 1020){
+        $('.window').addClass('window-s');
+      }
+      if(width < 1020){
+        $('.window').addClass('window-m');
+      }
+
+</script>
